@@ -1,0 +1,228 @@
+/* Navbar.css */
+.barraArriba {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  padding: 0 15%;
+  /* Mucho más margen hacia el centro */
+  background-color: rgba(13, 27, 46, 0.98);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 168, 255, 0.2);
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoPlaceholder {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #00bfff, #0055ff);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #0d1b2e;
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+}
+
+.brandName {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
+}
+
+.linksSection {
+  display: flex;
+  gap: 30px;
+}
+
+.navLink {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #a0a0a0;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 5px 0;
+}
+
+.navLink:hover {
+  color: #00bfff;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #00bfff;
+  transition: width 0.3s ease;
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+.iconsSection {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.iconBtn {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.iconBtn img {
+  width: 24px;
+  height: 24px;
+  /* Eliminado el filter para que se vean bien (ya son blancos) */
+}
+
+.iconBtn:hover img {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 5px #00bfff);
+}
+
+.userDot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background-color: #00ff00;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00ff00;
+}
+
+/* Dropdown */
+.accountWrapper {
+  position: relative;
+}
+
+.accountDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 15px;
+  width: 260px;
+  background: #1a2a3a;
+  border: 1px solid rgba(0, 168, 255, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdownHeader {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(0, 168, 255, 0.05);
+}
+
+.avatarSmall {
+  width: 45px;
+  height: 45px;
+  background: #00a8ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #0d1b2e;
+}
+
+.userDetails {
+  overflow: hidden;
+}
+
+.userName {
+  margin: 0;
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.userEmail {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  color: #a0a0a0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dropdownDivider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dropdownItem {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  text-align: left;
+  background: none;
+  border: none;
+  color: #cccccc;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dropdownItem:hover {
+  background: rgba(0, 168, 255, 0.1);
+  color: #00bfff;
+}
+
+.dropdownItem.logout {
+  color: #ff4d4d;
+}
+
+.dropdownItem.logout:hover {
+  background: rgba(255, 77, 77, 0.1);
+  color: #ff6666;
+}

@@ -1,0 +1,94 @@
+.productCard {
+  min-width: 280px;
+  max-width: 450px;
+  height: 420px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 0;
+  /* Quitamos padding aquí para que la imagen llegue a los bordes si quieres, o lo mantenemos según gusto */
+  backdrop-filter: blur(6px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.productCard img {
+  width: 100%;
+  height: 250px;
+  /* Aumentamos altura de la imagen */
+  object-fit: cover;
+  /* Cambiamos a cover para que se "estire" y llene el espacio */
+  margin-bottom: 0;
+}
+
+.productCard h4,
+.productCard .price,
+.productCard .btnBuy {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.productCard h4 {
+  margin: 15px 0 5px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.productCard .price {
+  color: #00a8ff;
+  font-weight: 600;
+}
+
+.btnBuy {
+  background: linear-gradient(135deg, #00bfff, #0099ff);
+  border-radius: 999px;
+  padding: 10px 20px;
+  border: none;
+  color: #0a1628;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 15px rgba(0, 191, 255, 0.35);
+  position: relative;
+  overflow: hidden;
+  margin-top: 6px;
+  align-self: flex-start;
+}
+
+/* Brillo animado al pasar el ratón */
+.btnBuy::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+
+.btnBuy:hover::before {
+  left: 120%;
+}
+
+.btnBuy:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 191, 255, 0.55);
+}
+
+.btnBuy:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 191, 255, 0.3);
+}

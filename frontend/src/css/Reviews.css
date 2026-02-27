@@ -1,0 +1,354 @@
+/* ====== FONDO GENERAL ====== */
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: radial-gradient(circle at top, #0b1622, #02060d);
+  color: #e6f1ff;
+}
+
+/* ====== CONTENEDOR PRINCIPAL ====== */
+
+.reviews-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 100px 20px 40px;
+  min-height: 100vh;
+}
+
+/* ====== HEADER ====== */
+
+.reviews-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.reviews-header h2 {
+  font-size: 36px;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
+  color: #6ce5ff;
+  text-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+  font-weight: 700;
+}
+
+.reviews-subtitle {
+  color: #8a8a8a;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* ====== FORMULARIO ====== */
+
+.review-form {
+  background: rgba(20, 30, 40, 0.6);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 30px;
+  border: 1px solid rgba(0, 255, 255, 0.15);
+  margin-bottom: 50px;
+  box-shadow: 0 8px 32px rgba(0, 255, 255, 0.1);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #8a8a8a;
+  font-weight: 600;
+}
+
+.review-form input,
+.review-form textarea,
+.review-form select {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  outline: none;
+  transition: all 0.3s;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+}
+
+.review-form input::placeholder,
+.review-form textarea::placeholder {
+  color: #555;
+}
+
+.review-form input:focus,
+.review-form textarea:focus,
+.review-form select:focus {
+  border-color: #00bfff;
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.review-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* ====== BOTON SUBMIT ====== */
+
+.submit-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #00bfff, #0099ff);
+  color: #0a1628;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4);
+}
+
+.btn-icon {
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+
+.submit-btn:hover .btn-icon {
+  transform: translateX(5px);
+}
+
+/* ====== GRID DE REVIEWS ====== */
+
+.reviews-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .reviews-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ====== NO REVIEWS ====== */
+
+.no-reviews {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 20px;
+  border: 1px dashed rgba(0, 255, 255, 0.2);
+}
+
+.no-reviews p {
+  color: #6ce5ff;
+  font-size: 18px;
+  margin: 0;
+}
+
+.no-reviews-sub {
+  color: #8a8a8a !important;
+  font-size: 14px !important;
+  margin-top: 8px !important;
+}
+
+/* ====== TARJETAS ====== */
+
+.review-card {
+  background: rgba(20, 30, 40, 0.5);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid rgba(0, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.review-card::before {
+  content: "";
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: linear-gradient(120deg,
+      transparent,
+      rgba(0, 255, 255, 0.15),
+      transparent);
+  transform: rotate(25deg);
+  top: -50%;
+  left: -150%;
+  opacity: 0;
+  transition: 0.6s;
+}
+
+.review-card:hover::before {
+  opacity: 1;
+  left: 100%;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 255, 255, 0.2);
+  border-color: rgba(0, 255, 255, 0.3);
+}
+
+/* ====== HEADER DE TARJETA ====== */
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.review-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00bfff, #0099ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #0a1628;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.review-user h4 {
+  margin: 0;
+  color: #6ce5ff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.review-user small {
+  color: #7a8fa6;
+  font-size: 12px;
+  display: block;
+  margin-top: 2px;
+}
+
+.review-rating {
+  font-size: 18px;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 162, 0.6));
+}
+
+/* ====== COMENTARIO ====== */
+
+.review-comment {
+  margin: 0;
+  line-height: 1.6;
+  color: #cbd6e2;
+  font-size: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ====== NOTIFICACIONES ====== */
+
+.notification {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  z-index: 9999;
+  background: rgba(20, 30, 40, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  animation: slideIn 0.3s ease-out;
+  min-width: 280px;
+  max-width: 400px;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.notification.success {
+  border-left: 4px solid #00ffa2;
+  box-shadow: 0 8px 32px rgba(0, 255, 162, 0.2);
+}
+
+.notification.error {
+  border-left: 4px solid #ff4757;
+  box-shadow: 0 8px 32px rgba(255, 71, 87, 0.2);
+}
+
+.notificationIcon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.notification.success .notificationIcon {
+  background: linear-gradient(135deg, #00ffa2, #00d4ff);
+  color: #0a1628;
+}
+
+.notification.error .notificationIcon {
+  background: linear-gradient(135deg, #ff4757, #ff6b81);
+  color: white;
+}
+
+.notification span:last-child {
+  color: #e6f1ff;
+  font-size: 14px;
+  line-height: 1.4;
+}

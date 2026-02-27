@@ -1,0 +1,104 @@
+/* Account.css */
+.account-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #1a3a4a 0%, #0d1b2e 100%);
+    padding-top: 80px;
+    /* altura navbar */
+}
+
+.account-card {
+    background: rgba(26, 42, 58, 0.8);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 168, 255, 0.3);
+    border-radius: 20px;
+    padding: 50px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #00bfff, #0055ff);
+    border-radius: 50%;
+    margin: 0 auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #0d1b2e;
+    box-shadow: 0 0 25px rgba(0, 191, 255, 0.5);
+}
+
+.user-info h3 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.user-info p {
+    margin: 10px 0 30px;
+    color: #a0a0a0;
+    font-size: 1.1rem;
+}
+
+.account-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.account-btn,
+.logout-btn {
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    border: none;
+}
+
+.account-btn {
+    background: #00a8ff;
+    color: #0d1b2e;
+}
+
+.account-btn:hover {
+    background: #00bfff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 168, 255, 0.4);
+}
+
+.logout-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 77, 77, 0.5);
+    color: #ff4d4d;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 77, 77, 0.1);
+    border-color: #ff4d4d;
+    transform: translateY(-2px);
+}
