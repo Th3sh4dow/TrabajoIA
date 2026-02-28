@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Login.css";
 import { useUser } from "../context/UserContext";
+import { supabase } from "../supabaseClient";
 
 function Login() {
   const { login } = useUser();
@@ -15,6 +16,21 @@ function Login() {
   const showNotification = (message, type = "success") => {
     setNotification({ message, type });
     setTimeout(() => setNotification(null), 3000);
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: window.location.origin + '/menu'
+        }
+      });
+      if (error) throw error;
+    } catch (err) {
+      console.error(err);
+      showNotification("Error al conectar con Google: " + err.message, "error");
+    }
   };
 
   const handleSubmit = async () => {
@@ -40,7 +56,6 @@ function Login() {
 
       if (res.ok) {
         showNotification(data.message, "success");
-        // Opcional: redirigir al menú si login correcto
         // Opcional: redirigir al menú si login correcto
         if (mode === "login") {
           login(data.user); // Save to context
@@ -126,7 +141,7 @@ function Login() {
           <div className="divider">OR LINKED IDENTITY</div>
 
           <div className="social">
-            <button className="socialBtn">G-ID</button>
+            <button className="socialBtn" onClick={handleGoogleLogin}>G-ID</button>
             <button className="socialBtn">A-LINK</button>
           </div>
         </div>

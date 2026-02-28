@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../css/Account.css';
 import Navbar from '../components/Navbar.jsx';
+import { useUser } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 function Account() {
-    const [user, setUser] = useState(null);
+    const { user, logout } = useUser();
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        }
-    }, []);
-
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        window.location.href = '/';
+    const handleLogout = async () => {
+        await logout();
+        navigate('/');
     };
 
     if (!user) {
@@ -24,7 +20,7 @@ function Account() {
                 <div className="account-container">
                     <div className="account-card">
                         <h2>No has iniciado sesión</h2>
-                        <button className="account-btn" onClick={() => window.location.href = '/login'}>IR AL LOGIN</button>
+                        <button className="account-btn" onClick={() => navigate('/login')}>IR AL LOGIN</button>
                     </div>
                 </div>
             </>
@@ -37,7 +33,11 @@ function Account() {
             <div className="account-container">
                 <div className="account-card">
                     <div className="profile-img">
-                        {user.name.charAt(0).toUpperCase()}
+                        {user.avatar ? (
+                            <img src={user.avatar} alt="Profile avatar" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                        ) : (
+                            user.name ? user.name.charAt(0).toUpperCase() : '?'
+                        )}
                     </div>
                     <div className="user-info">
                         <h3>{user.name}</h3>

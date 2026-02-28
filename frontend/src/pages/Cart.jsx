@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Bar from "../components/Navbar.jsx";
 import "../css/Cart.css";
+import { useUser } from "../context/UserContext";
 
 function Cart() {
+  const { user } = useUser();
   const [carritos, setCarritos] = useState([]);
   const [notification, setNotification] = useState(null);
   const navigate = useNavigate();
@@ -13,45 +15,63 @@ function Cart() {
     setTimeout(() => setNotification(null), 3000);
   };
 
-  useEffect(() => {
-    const fetchCarritos = async () => {
-      try {
-        const res = await fetch("http://localhost:3001/cart");
-        const data = await res.json();
+  const fetchCarritos = async () => {
+    try {
+      const res = await fetch("http://localhost:3001/cart");
+      const data = await res.json();
 
-        if (Array.isArray(data)) {
-          setCarritos(data);
-        } else {
-          setCarritos([]);
-          console.error("La respuesta no es un array:", data);
-        }
-      } catch (err) {
-        console.error(err);
+      if (Array.isArray(data)) {
+        setCarritos(data);
+      } else {
         setCarritos([]);
-        showNotification("Error al cargar los carritos", "error");
+        console.error("La respuesta no es un array:", data);
       }
-    };
+    } catch (err) {
+      console.error(err);
+      setCarritos([]);
+      showNotification("Error al cargar los carritos", "error");
+    }
+  };
+
+  useEffect(() => {
     fetchCarritos();
   }, []);
 
   const calculateTotal = (items) => {
     if (!items) return 0;
-    // Si items ya es un objeto/array, no hace falta parsear
     const parsedItems = typeof items === 'string' ? JSON.parse(items) : items;
     return parsedItems.reduce((sum, item) => sum + (Number(item.price) || 0), 0);
   };
 
-  const handlePayment = async (carritoId, total) => {
-    // Simulación de pago
+  const handlePayment = async (carritoId, total, items) => {
     showNotification("Procesando pago...", "success");
 
-    // Aquí podrías integrar con una pasarela de pago real
-    setTimeout(() => {
-      showNotification(`¡Pago de $${total.toFixed(2)} completado con éxito!`, "success");
+    try {
+      const response = await fetch("http://localhost:3001/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          carritoId: carritoId,
+          items: items,
+          user_email: user?.email || "anonimo@example.com"
+        })
+      });
 
-      // Opcional: eliminar el carrito después del pago
-      // o marcarlo como "pagado" en la base de datos
-    }, 1500);
+      const data = await response.json();
+
+      if (response.ok) {
+        showNotification(`¡Pago de $${total.toFixed(2)} completado! Se ha enviado un correo de confirmación.`, "success");
+        // Refrescar la lista de carritos para que desaparezca el pagado
+        setTimeout(() => {
+          fetchCarritos();
+        }, 1500);
+      } else {
+        throw new Error(data.error || "Error al procesar el pago");
+      }
+    } catch (err) {
+      console.error(err);
+      showNotification("Error en la pasarela de pago: " + err.message, "error");
+    }
   };
 
   return (
@@ -108,7 +128,7 @@ function Cart() {
                     </div>
                     <button
                       className="payment-btn"
-                      onClick={() => handlePayment(carrito.id, total)}
+                      onClick={() => handlePayment(carrito.id, total, items)}
                     >
                       <span>PROCESS PAYMENT</span>
                       <span className="payment-icon">→</span>

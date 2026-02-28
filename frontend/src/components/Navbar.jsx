@@ -67,7 +67,13 @@ function Navbar() {
           {showDropdown && user && (
             <div className="accountDropdown">
               <div className="dropdownHeader">
-                <div className="avatarSmall">{user.name.charAt(0).toUpperCase()}</div>
+                <div className="avatarSmall">
+                  {user.avatar ? (
+                    <img src={user.avatar} alt="Avatar" style={{ width: '100%', height: '100%', borderRadius: '50%' }} />
+                  ) : (
+                    user.name.charAt(0).toUpperCase()
+                  )}
+                </div>
                 <div className="userDetails">
                   <p className="userName">{user.name}</p>
                   <p className="userEmail">{user.email}</p>
