@@ -1,12 +1,12 @@
 import '../css/ProductCard.css';
 
-function ProductCard({ name, price, image }) {
+function ProductCard({ name, price, image, onAdd }) {
   return (
     <div className="productCard">
       <img src={image} alt={name} />
       <h4>{name}</h4>
       <span className="price">${price}</span>
-      <button className='btnBuy'>AÑADIR AL CARRITO</button>
+      <button className='btnBuy' onClick={onAdd}>AÑADIR AL CARRITO</button>
     </div>
   );
 }

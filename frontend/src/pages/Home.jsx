@@ -4,10 +4,11 @@ import Bar from '../components/Navbar.jsx'
 import ProductCard from '../components/Productcard.jsx'
 import '../css/Home.css'
 import Hamburguesa from '../assets/Hamburguesa.png'
-import Menu from './Menu.jsx'
+import { useCart } from "../context/Cartcontext";
 
 function Home() {
   const navigate = useNavigate();
+  const { addToCart } = useCart();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -61,6 +62,7 @@ function Home() {
               name={product.name}
               price={product.price}
               image={product.image_url}
+              onAdd={() => addToCart(product)}
             />
           ))}
         </div>
