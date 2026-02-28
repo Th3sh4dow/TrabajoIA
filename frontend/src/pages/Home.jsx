@@ -13,7 +13,7 @@ function Home() {
   useEffect(() => {
     const fetchTopProducts = async () => {
       try {
-        const res = await fetch("http://localhost:3001/products");
+        const res = await fetch("/api/products");
         const data = await res.json();
         if (Array.isArray(data)) {
           setProducts(data.slice(0, 3)); // Solo los primeros 3

@@ -42,8 +42,8 @@ function Login() {
 
     const url =
       mode === "login"
-        ? "http://localhost:3001/users/login"
-        : "http://localhost:3001/users/signup";
+        ? "/api/users/login"
+        : "/api/users/signup";
 
     try {
       const res = await fetch(url, {

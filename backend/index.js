@@ -27,18 +27,30 @@ app.use((req, res, next) => {
   next();
 });
 
-// --- RUTAS ---
-app.use("/products", require("./routes/products"));
-app.use("/orders", require("./routes/orders"));
-app.use("/reviews", require("./routes/reviews"));
-app.use("/users", require("./routes/users"));
-app.use("/cart", require("./routes/cart"));
+// --- CONFIGURACIÓN DE RUTAS ---
+const apiRouter = express.Router();
+apiRouter.use("/products", require("./routes/products"));
+apiRouter.use("/orders", require("./routes/orders"));
+apiRouter.use("/reviews", require("./routes/reviews"));
+apiRouter.use("/users", require("./routes/users"));
+apiRouter.use("/cart", require("./routes/cart"));
+
+// Para que funcione tanto en Vercel (/api) como en local (/) 
+app.use("/api", apiRouter);
+app.use("/", apiRouter);
 
 app.get("/", (req, res) => {
   res.send("Backend funcionando con API de Supabase 🚀");
 });
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Servidor en http://localhost:${PORT}`);
-});
+
+// Solo ejecutamos el servidor local si no estamos en Vercel (donde lo maneja serverless)
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Servidor local en http://localhost:${PORT}`);
+  });
+}
+
+// Exportar la instancia para que Vercel Functions pueda cargarla
+module.exports = app;

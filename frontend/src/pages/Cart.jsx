@@ -17,7 +17,7 @@ function Cart() {
 
   const fetchCarritos = async () => {
     try {
-      const res = await fetch("http://localhost:3001/cart");
+      const res = await fetch("/api/cart");
       const data = await res.json();
 
       if (Array.isArray(data)) {
@@ -47,7 +47,7 @@ function Cart() {
     showNotification("Procesando pago...", "success");
 
     try {
-      const response = await fetch("http://localhost:3001/orders", {
+      const response = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -16,7 +16,7 @@ function Reviews() {
 
   // Traer reseñas
   useEffect(() => {
-    fetch("http://localhost:3001/reviews")
+    fetch("/api/reviews")
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
@@ -52,7 +52,7 @@ function Reviews() {
       comment: form.comment
     };
 
-    fetch("http://localhost:3001/reviews", {
+    fetch("/api/reviews", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(reviewData)

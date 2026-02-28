@@ -24,7 +24,7 @@ function Menu() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("http://localhost:3001/products");
+        const res = await fetch("/api/products");
         if (!res.ok) throw new Error("Error al obtener productos");
         const data = await res.json();
         if (Array.isArray(data)) {
@@ -59,7 +59,7 @@ function Menu() {
         price: Number(item.price || 0),
       }));
 
-      const res = await fetch("http://localhost:3001/cart", {
+      const res = await fetch("/api/cart", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ items: payload, user_id: user.id }),
